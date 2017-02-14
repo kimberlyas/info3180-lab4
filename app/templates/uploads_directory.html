@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<h1 class="page-header">Uploaded Files Directory</h1>
+
+<ul class="list-group">
+    {% for file in file_list %}
+
+      <a href={{ url_for('static',filename= "uploads/" + file )}}><li class="list-group-item">{{ file }}</li></a>
+
+    {% endfor %}
+</ul>
+
+
+{% endblock %}
