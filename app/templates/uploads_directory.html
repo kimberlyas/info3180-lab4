@@ -5,11 +5,22 @@
 
 <ul class="list-group">
     {% for file in file_list %}
-
-      <a href={{ url_for('static',filename= "uploads/" + file )}}><li class="list-group-item">{{ file }}</li></a>
-
+        <li class="list-group-item">
+        {% if file.rsplit('.', 1)[1].lower() == 'jpg' or file.rsplit('.', 1)[1].lower() == 'jpeg' %}
+            <figure class="figure">
+                <img src={{ url_for('static',filename= "uploads/"+ file )}} alt={{ file }} class="figure-img img-thumbnail" height="200" width="200">
+                <figcaption class="figure-caption"><a href={{ url_for('static',filename= "uploads/" + file )}}>{{ file }}</a></figcaption>
+            </figure>
+        {% else %}
+             <a href={{ url_for('static',filename= "uploads/" + file )}}>{{ file }}</a>
+        {% endif %}
+        </li>
     {% endfor %}
 </ul>
 
 
 {% endblock %}
+
+
+  <img src="..." class=" img-fluid rounded" alt="A generic square placeholder image with rounded corners in a figure.">
+ 
