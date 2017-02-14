@@ -65,12 +65,18 @@ def logout():
 @app.route('/filelisting')
 def file_listing():
     """ Lists uploaded files """
+    # ensuring route is only accessible to logged in users
+    if not session.get('logged_in'):
+        abort(401)
+        
     file_list = [] # stores list of uploaded files
     rootdir = os.getcwd() # get root
+    
     # Iterate over contents of static/uploads folder
     for subdir, dirs, files in os.walk(rootdir + '/app/static/uploads'):
         for file in files:
             file_list.append(file)
+            
     # Render template which lists uploaded files as an HTML list
     return render_template('uploads_directory.html', file_list=file_list)
 
